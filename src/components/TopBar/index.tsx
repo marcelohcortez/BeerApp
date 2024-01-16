@@ -1,5 +1,8 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
+import beerWikiLogo from '../../images/beerWikiLogo.png';
+import styles from './TopBar.module.css';
 
 interface Props {
   drawerWidth: number;
@@ -25,9 +28,7 @@ const TopBar = (props: Props) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          V
-        </Typography>
+        <img src={beerWikiLogo} className={styles.topBarLogo} alt="Beer Wiki logo"/>
       </Toolbar>
     </AppBar>
     );
