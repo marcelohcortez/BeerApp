@@ -1,16 +1,23 @@
-import { getBeerList } from '../../api';
-import { Beer } from '../../types';
+import { getBeerList, getBeerMetaData } from '../../api';
+import { Beer, Meta } from '../../types';
 import handle from '../../utils/error';
 
-const fetchData = (setData: (data: Array<Beer>) => void) => {
-  (async () => {
-    try {
-      const response = await getBeerList();
-      setData(response.data);
-    } catch (error) {
-      handle(error);
-    }
-  })();
+const fetchData = async (setBeerList: (data: Array<Beer>) => void, customParam?: object) => {
+  try {
+    const response = await getBeerList(customParam);
+    setBeerList(response.data)
+  } catch (error) {
+    handle(error);
+  }
 };
 
-export { fetchData };
+const fetchMetaData = async (setTotalBrewers: (data: Meta) => void) => {
+  try {
+    const response = await getBeerMetaData();
+    setTotalBrewers(response.data);
+  } catch (error) {
+    handle(error);
+  }
+};
+
+export { fetchData, fetchMetaData };
