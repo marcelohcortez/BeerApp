@@ -1,0 +1,75 @@
+.beerSection{
+    margin-bottom: 50px;
+}
+.beerHeader{
+    display: grid;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 40px;
+}
+.beerTitle{
+    font-size: 6rem;
+    color: rgba(28, 128, 241, 1);
+}
+.beerAddFavorite{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: 3px solid white;
+    border-radius: 30px;
+    display: flex;
+}
+.beerAddFavorite svg{
+    width: 40px;
+    height: 40px;
+    color: white;
+}
+.beerDetails{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 1em;
+}
+.beerDetails span{
+    display: flex;
+    background-color: rgba(28, 128, 241, 1);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+}
+.beerDetails span b{
+    color: rgba(241, 142, 28, 1);
+    margin-right: 10px;
+}
+.beerDetails span a{
+    font-weight: bold;
+    color: white;
+}
+.beerDetails span a:hover{
+    text-decoration: none;
+}
+.beerMap{
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    background-color: rgba(241, 142, 28, 1);
+    text-align: center;
+    padding: 40px 20px;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+.beerMap:hover{
+    background-color: rgba(241, 142, 28, 0.5);
+    color: rgba(28, 128, 241, 1);
+}
