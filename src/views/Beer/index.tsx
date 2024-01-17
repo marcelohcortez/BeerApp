@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Beer as IBeer } from '../../types';
-import { fetchData } from './utils';
 import { useParams } from 'react-router-dom';
 
-import bgBeer from '../../images/bgBeer.jpg';
-import styles from './Beer.module.css';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import PublicIcon from '@mui/icons-material/Public';
@@ -12,6 +8,12 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import FlagIcon from '@mui/icons-material/Flag';
 import StoreIcon from '@mui/icons-material/Store';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import { Beer as IBeer } from '../../types';
+import { fetchData } from './utils';
+
+import bgBeer from '../../images/bgBeer.jpg';
+import styles from './Beer.module.css';
 
 const Beer = () => {
   const { id } = useParams();
