@@ -1,27 +1,59 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { fetchData } from './utils';
 import { Beer } from '../../types';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Checkbox, Paper, TextField, Link } from '@mui/material';
 import styles from './Home.module.css';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
 const Home = () => {
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
   const [savedList, setSavedList] = useState<Array<Beer>>([]);
-  const [query, setQuery] = useState("");
+  const [filterQuery, setFilterQuery] = useState("");
 
   // eslint-disable-next-line
-  useEffect(fetchData.bind(this, setBeerList), []);
+  useEffect(fetchData.bind(this, setBeerList), [])
+
+  useEffect( () => {
+    const getBeerFavorites: string | null = window.localStorage.getItem('BEER_FAVORITES')
+    
+    // populate the savedList with the content from localStorage if any
+    if (getBeerFavorites) {
+      setSavedList(JSON.parse(getBeerFavorites))
+    }
+  }, [beerList])
 
   const filteredItems = useMemo(() => {
-    return beerList.filter(beerListItem => {
-      console.log(beerListItem)
-      return beerListItem.name.toLowerCase().includes(query.toLowerCase())
-    })
-  }, [beerList, query])
+    // filter the beerList and return all items that match the query
+    return beerList.filter(beerListItem => beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase()))
+  }, [beerList, filterQuery])
 
-  const clearSearch = () => {
-    setQuery("")
+  const handleReloadList = () => {
+    setFilterQuery("")
+    fetchData.bind(this, setBeerList)()
+  }
+
+  const handleClickFavorite = (beer: Beer): void => {
+    if (!savedList.includes(beer)) {
+      setSavedList([...savedList, beer])
+    } else {
+      setSavedList(savedList.filter((obj) => ( obj.id !== beer.id )))
+    }
+    // update the saved items in the localStorage
+    window.localStorage.setItem('BEER_FAVORITES', JSON.stringify(savedList));
+  }
+
+  const handleClearFavorites = () => {
+    setSavedList([])
+    window.localStorage.setItem("BEER_FAVORITES", "");
+  }
+
+  const isFavorite = (beer: Beer) =>{
+    if (savedList.includes(beer)) {
+      return true
+    }
+    
+    return false
   }
 
   return (
@@ -31,13 +63,23 @@ const Home = () => {
           <Paper>
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
-                <TextField label='Filter...' variant='outlined' value={query} onChange={e => setQuery(e.target.value)}/>
-                <Button variant='contained' onClick={clearSearch}>Reload list</Button>
+                <TextField 
+                  label='Filter...'
+                  variant='outlined'
+                  value={filterQuery}
+                  onChange={e => setFilterQuery(e.target.value)}
+                />
+                <Button variant='contained' onClick={() => handleReloadList()}>Reload list</Button>
               </div>
               <ul className={styles.list}>
                 {filteredItems.map((beer, index) => (
                   <li key={index.toString()}>
-                    <Checkbox />
+                    <Checkbox 
+                      checked={isFavorite(beer)}
+                      icon={<FavoriteBorder />} 
+                      checkedIcon={<Favorite />}
+                      onChange={() => handleClickFavorite( beer)}
+                    />
                     <Link component={RouterLink} to={`/beer/${beer.id}`}>
                       {beer.name}
                     </Link>
@@ -51,14 +93,23 @@ const Home = () => {
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
                 <h3>Saved items</h3>
-                <Button variant='contained' size='small'>
+                <Button 
+                  variant='contained'
+                  size='small'
+                  onClick={() => handleClearFavorites()}
+                >
                   Remove all items
                 </Button>
               </div>
               <ul className={styles.list}>
                 {savedList.map((beer, index) => (
                   <li key={index.toString()}>
-                    <Checkbox />
+                    <Checkbox 
+                      checked={isFavorite(beer)}
+                      icon={<FavoriteBorder />} 
+                      checkedIcon={<Favorite />}
+                      onChange={() => handleClickFavorite(beer)}
+                    />
                     <Link component={RouterLink} to={`/beer/${beer.id}`}>
                       {beer.name}
                     </Link>
