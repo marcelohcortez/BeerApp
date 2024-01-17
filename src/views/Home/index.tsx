@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchData } from './utils';
 import { Beer } from '../../types';
 import { Link as RouterLink } from 'react-router-dom';
@@ -8,9 +8,21 @@ import styles from './Home.module.css';
 const Home = () => {
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
   const [savedList, setSavedList] = useState<Array<Beer>>([]);
+  const [query, setQuery] = useState("");
 
   // eslint-disable-next-line
   useEffect(fetchData.bind(this, setBeerList), []);
+
+  const filteredItems = useMemo(() => {
+    return beerList.filter(beerListItem => {
+      console.log(beerListItem)
+      return beerListItem.name.toLowerCase().includes(query.toLowerCase())
+    })
+  }, [beerList, query])
+
+  const clearSearch = () => {
+    setQuery("")
+  }
 
   return (
     <article>
@@ -19,11 +31,11 @@ const Home = () => {
           <Paper>
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
-                <TextField label='Filter...' variant='outlined' />
-                <Button variant='contained'>Reload list</Button>
+                <TextField label='Filter...' variant='outlined' value={query} onChange={e => setQuery(e.target.value)}/>
+                <Button variant='contained' onClick={clearSearch}>Reload list</Button>
               </div>
               <ul className={styles.list}>
-                {beerList.map((beer, index) => (
+                {filteredItems.map((beer, index) => (
                   <li key={index.toString()}>
                     <Checkbox />
                     <Link component={RouterLink} to={`/beer/${beer.id}`}>
