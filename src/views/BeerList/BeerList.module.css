@@ -1,0 +1,10 @@
+.beerListHeader{
+    font-size: 2rem;
+    text-align: center;
+    text-decoration: underline;
+    
+}
+.beerListPagination{
+    align-self: center;
+    margin: 20px 0;
+}
