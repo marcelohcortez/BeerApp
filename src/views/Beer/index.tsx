@@ -29,7 +29,6 @@ const Beer = () => {
       <section className={styles.beerSection}>
         <header style={{backgroundImage: `url(${bgBeer})`}} className={styles.beerHeader}>
           <h1 className={styles.beerTitle}>{beer?.name}</h1>
-          <span className={styles.beerAddFavorite}><FavoriteBorderIcon/></span>
         </header>
         <main>         
           <div className={styles.beerDetails}>
