@@ -1,4 +1,4 @@
-import { getBeerList, getBeerMetaData } from '../../api';
+import { getBeerList, getBeerMetaData, searchBeerList } from '../../api';
 import { Beer, Meta } from '../../types';
 import handle from '../../utils/error';
 
@@ -20,4 +20,13 @@ const fetchMetaData = async (setTotalBrewers: (data: Meta) => void) => {
   }
 };
 
-export { fetchData, fetchMetaData };
+const searchData = async (setBeerList: (data: Array<Beer>) => void, customSearchParam: string) => {
+  try {
+    const response = await searchBeerList(customSearchParam);
+    setBeerList(response.data);
+  } catch (error) {
+    handle(error);
+  }
+};
+
+export { fetchData, fetchMetaData, searchData };

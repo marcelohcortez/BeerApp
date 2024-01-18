@@ -1,26 +1,30 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Avatar, List, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
-import { orange, blue } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import SportsBar from '@mui/icons-material/SportsBar';
 import SortIcon from '@mui/icons-material/Sort';
 
 import { Beer, Meta } from '../../types';
-import { fetchData, fetchMetaData } from './utils';
+import { fetchData, fetchMetaData, searchData } from './utils';
 import styles from './BeerList.module.css';
 
 
 const BeerList = () => {
   const navigate = useNavigate();
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
+  const [searchResult, setSearchResult] = useState<Array<Beer>>([]);
+  const [totalBrewers, setTotalBrewers] = useState<Meta>();
   const [perPage, setPerPage] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>();
-  const [totalBrewers, setTotalBrewers] = useState<Meta>();
-  const [listSort, setListSort] = useState<string>("asc")
+  const [listSort, setListSort] = useState<string>("asc");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect( () => { 
     // Custom parameters for the fetchData function
@@ -37,6 +41,10 @@ const BeerList = () => {
      
   }, [beerList]);
 
+  useEffect( () => { 
+    searchData.bind(this, setSearchResult, searchQuery)();     
+  }, [searchQuery]);
+
   const onBeerClick = (id: string) => navigate(`/beer/${id}`);
 
   const handleChange = (_: ChangeEvent<unknown>, value: number) => {
@@ -51,6 +59,12 @@ const BeerList = () => {
     return setListSort("asc")
   }
 
+  const handleSearchClick = (option: Beer | null) => {
+    if(option) {
+      window.location.href = `beer/${option?.id}`;
+    }
+  }
+
   return (
     <article>
       <section>
@@ -58,7 +72,17 @@ const BeerList = () => {
           <h1>Brewers Listing</h1>
         </header>
         <main>
-          <div className={styles.sortingIcon}>
+          <div className={styles.beerListTopBar}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={searchResult}
+              getOptionLabel={option => option.name}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Search" />}
+              onInputChange={(_, value) => setSearchQuery(value)}
+              onChange={(event, option) => handleSearchClick(option)}
+            />
             <SortIcon 
               fontSize={'large'}
               sx={{ ":hover": {color: orange[600], cursor: 'pointer'} }}

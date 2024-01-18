@@ -4,8 +4,11 @@
     text-decoration: underline;
     
 }
-.sortingIcon{
-    text-align: right;
+.beerListTopBar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
 }
 .beerListPagination{
     align-self: center;
