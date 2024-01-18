@@ -4,7 +4,10 @@
     text-decoration: underline;
     
 }
+.sortingIcon{
+    text-align: right;
+}
 .beerListPagination{
     align-self: center;
-    margin: 20px 0;
+    margin: 40px 0;
 }
