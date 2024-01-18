@@ -7,7 +7,6 @@ import PublicIcon from '@mui/icons-material/Public';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import FlagIcon from '@mui/icons-material/Flag';
 import StoreIcon from '@mui/icons-material/Store';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import { Beer as IBeer } from '../../types';
 import { fetchData } from './utils';
@@ -21,7 +20,6 @@ const Beer = () => {
 
   // eslint-disable-next-line
   useEffect(fetchData.bind(this, setBeer, id), [id]);
-  console.log(beer)
 
   return (
     

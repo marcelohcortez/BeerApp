@@ -63,6 +63,7 @@ const Home = () => {
           <Paper>
             <div className={styles.listContainer}>
               <div className={styles.listHeader}>
+                {/* This search is limited to filtering the items already displayed in the random list */}
                 <TextField 
                   label='Filter...'
                   variant='outlined'

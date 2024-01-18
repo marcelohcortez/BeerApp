@@ -47,11 +47,14 @@ const BeerList = () => {
 
   const onBeerClick = (id: string) => navigate(`/beer/${id}`);
 
-  const handleChange = (_: ChangeEvent<unknown>, value: number) => {
+  const handleChange = (value: number) => {
     setPage(value);
   }
 
   const handleSort = () => {
+    // done like this, but it could be done in a simpler way
+    // taking 'true' as if it was 'asc and 'false' as 'desc'
+    // that way this function wouldn't need to exist
     if (listSort === "asc") {
       return setListSort("desc")
     }
@@ -73,6 +76,7 @@ const BeerList = () => {
         </header>
         <main>
           <div className={styles.beerListTopBar}>
+            {/* This search looks up on the entire API */}
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -113,7 +117,7 @@ const BeerList = () => {
               color={"primary"}
               count={totalPages} 
               page={page}
-              onChange={handleChange}
+              onChange={(_, value) => handleChange(value)}
               className={styles.beerListPagination}
             />
           </Stack>
