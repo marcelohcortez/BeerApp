@@ -1,5 +1,6 @@
 .homeHeader{
   display: grid;
+  background-image: url("../../images/bgHome.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

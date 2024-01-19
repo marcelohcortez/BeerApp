@@ -6,7 +6,6 @@ import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { fetchData } from './utils';
 import { Beer } from '../../types';
 
-import bgHome from '../../images/bgHome.jpg';
 import styles from './Home.module.css';
 
 const Home = () => {
@@ -32,11 +31,13 @@ const Home = () => {
   }, [beerList, filterQuery])
 
   const handleReloadList = () => {
+    // clear query data and fetch random breweries again
     setFilterQuery("")
     fetchData.bind(this, setBeerList)()
   }
 
   const handleClickFavorite = (beer: Beer): void => {
+    // check if clicked item is already in the fav list
     if (!savedList.includes(beer)) {
       setSavedList([...savedList, beer])
     } else {
@@ -62,7 +63,7 @@ const Home = () => {
   return (
     <article>
       <section>
-        <header style={{backgroundImage: `url(${bgHome})`}} className={styles.homeHeader}>
+        <header className={styles.homeHeader}>
           <h1 className={styles.homeTitle}>You've Got Questions.</h1>
           <h2 className={styles.homeSubTitle}>We've Got Beer.</h2>
         </header>

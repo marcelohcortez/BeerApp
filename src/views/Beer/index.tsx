@@ -11,7 +11,6 @@ import StoreIcon from '@mui/icons-material/Store';
 import { Beer as IBeer } from '../../types';
 import { fetchData } from './utils';
 
-import bgBeer from '../../images/bgBeer.jpg';
 import styles from './Beer.module.css';
 
 const Beer = () => {
@@ -25,7 +24,7 @@ const Beer = () => {
     
     <article>
       <section className={styles.beerSection}>
-        <header style={{backgroundImage: `url(${bgBeer})`}} className={styles.beerHeader}>
+        <header className={styles.beerHeader}>
           <h1 className={styles.beerTitle}>{beer?.name}</h1>
         </header>
         <main>         

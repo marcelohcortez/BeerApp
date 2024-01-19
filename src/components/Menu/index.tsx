@@ -16,7 +16,6 @@ import SportsBar from '@mui/icons-material/SportsBar';
 import HomeIcon from '@mui/icons-material/Home';
 
 import TopBar from '../TopBar';
-import bgGlobal from '../../images/bgGlobal.png';
 import styles from './Menu.module.css';
 
 const drawerWidth = 240;
@@ -37,7 +36,6 @@ export default function ResponsiveDrawer(props: Props) {
       
       <List 
         className={styles.menuList}
-        style={{backgroundImage: `url(${bgGlobal})`}}
       >
         <Link component={RouterLink} to={`/`}>
           <ListItem 

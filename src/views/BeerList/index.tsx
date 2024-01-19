@@ -12,7 +12,6 @@ import SortIcon from '@mui/icons-material/Sort';
 
 import { Beer, Meta } from '../../types';
 import { fetchData, fetchMetaData, searchData } from './utils';
-import bgBeerList from '../../images/bgBeerList.jpg';
 import styles from './BeerList.module.css';
 
 const BeerList = () => {
@@ -71,7 +70,7 @@ const BeerList = () => {
   return (
     <article>
       <section>
-        <header style={{backgroundImage: `url(${bgBeerList})`}} className={styles.beerListHeader}>
+        <header className={styles.beerListHeader}>
           <h1 className={styles.beerTitle}>Brewers Listing</h1>
         </header>
         <main>

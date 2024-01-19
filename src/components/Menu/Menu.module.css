@@ -1,7 +1,8 @@
 .menuList {
-  height: 100%;
+  background-image: url("../../images/bgGlobal.png");
   background-color: rgba(37, 89, 149, 1);
   background-blend-mode: color-burn;
+  height: 100%;
 }
 .menuListItem:hover{
   background-color: rgba(37, 89, 149, 1);

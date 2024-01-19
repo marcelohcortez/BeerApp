@@ -3,6 +3,7 @@
 }
 .beerHeader{
     display: grid;
+    background-image: url("../../images/bgBeer.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
