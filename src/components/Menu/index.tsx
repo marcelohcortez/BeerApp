@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Divider,
@@ -12,9 +14,10 @@ import {
 } from '@mui/material';
 import SportsBar from '@mui/icons-material/SportsBar';
 import HomeIcon from '@mui/icons-material/Home';
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+
 import TopBar from '../TopBar';
+import bgGlobal from '../../images/bgGlobal.png';
+import styles from './Menu.module.css';
 
 const drawerWidth = 240;
 
@@ -31,25 +34,34 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <>
-      <Divider />
-      <List>
+      
+      <List 
+        className={styles.menuList}
+        style={{backgroundImage: `url(${bgGlobal})`}}
+      >
         <Link component={RouterLink} to={`/`}>
-          <ListItem disablePadding>
+          <ListItem 
+            disablePadding 
+            className={styles.menuListItem}
+          >
             <ListItemButton>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon color={'secondary'} />
               </ListItemIcon>
-              <ListItemText primary='Home' />
+              <ListItemText primary='Home' color={'secondary'}/>
             </ListItemButton>
           </ListItem>
         </Link>
         <Link component={RouterLink} to={`/beer`}>
-          <ListItem disablePadding>
+          <ListItem 
+            disablePadding
+            className={styles.menuListItem}
+          >
             <ListItemButton>
               <ListItemIcon>
-                <SportsBar />
+                <SportsBar  color={'secondary'} />
               </ListItemIcon>
-              <ListItemText primary='Beer List' />
+              <ListItemText primary='Beer List' color={'secondary'}/>
             </ListItemButton>
           </ListItem>
         </Link>

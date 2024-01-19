@@ -1,14 +1,30 @@
 .beerListHeader{
-    font-size: 2rem;
+    display: grid;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: darkorange;
+    background-blend-mode: multiply;
+    min-height: 300px;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 40px;
     text-align: center;
-    text-decoration: underline;
-    
+    overflow: hidden;
+}
+.beerTitle{
+    font-size: 5rem;
+    color: white;
+    text-shadow: 4px 5px darkblue;
 }
 .beerListTopBar{
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
+}
+body .beerListItemButton:hover{
+    background-color: rgba(255, 200, 87, 1);
 }
 .beerListPagination{
     align-self: center;

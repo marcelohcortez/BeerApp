@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Avatar, List, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
@@ -12,8 +12,8 @@ import SortIcon from '@mui/icons-material/Sort';
 
 import { Beer, Meta } from '../../types';
 import { fetchData, fetchMetaData, searchData } from './utils';
+import bgBeerList from '../../images/bgBeerList.jpg';
 import styles from './BeerList.module.css';
-
 
 const BeerList = () => {
   const navigate = useNavigate();
@@ -56,10 +56,10 @@ const BeerList = () => {
     // taking 'true' as if it was 'asc and 'false' as 'desc'
     // that way this function wouldn't need to exist
     if (listSort === "asc") {
-      return setListSort("desc")
+      return setListSort("desc");
     }
 
-    return setListSort("asc")
+    return setListSort("asc");
   }
 
   const handleSearchClick = (option: Beer | null) => {
@@ -71,8 +71,8 @@ const BeerList = () => {
   return (
     <article>
       <section>
-        <header className={styles.beerListHeader}>
-          <h1>Brewers Listing</h1>
+        <header style={{backgroundImage: `url(${bgBeerList})`}} className={styles.beerListHeader}>
+          <h1 className={styles.beerTitle}>Brewers Listing</h1>
         </header>
         <main>
           <div className={styles.beerListTopBar}>
@@ -85,7 +85,7 @@ const BeerList = () => {
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Search" />}
               onInputChange={(_, value) => setSearchQuery(value)}
-              onChange={(event, option) => handleSearchClick(option)}
+              onChange={(_, option) => handleSearchClick(option)}
             />
             <SortIcon 
               fontSize={'large'}
@@ -95,9 +95,10 @@ const BeerList = () => {
           </div>
           <List>
             {beerList.map((beer) => (
-              <ListItemButton key={beer.id} 
+              <ListItemButton 
+                key={beer.id} 
                 onClick={onBeerClick.bind(this, beer.id)}
-                sx={{ ":hover": {bgcolor: orange[600]} }}
+                className={styles.beerListItemButton}
               >
                 <ListItemAvatar>
                   <Avatar>

@@ -35,16 +35,13 @@ const Beer = () => {
             <span><b><LocationCityIcon/></b> {beer?.city}</span>
             <span><b><FlagIcon/> </b> {beer?.country}</span>
             <span><b><LocalPhoneIcon/> </b> <a href={`tel:${beer?.phone}`}>{beer?.phone}</a></span>
-            <span><b><PublicIcon/> </b> <a href={beer?.website_url} rel="noreferrer" target="_blank">{beer?.website_url}</a></span>
+            {beer?.website_url && <span><b><PublicIcon/> </b> <a href={beer?.website_url} rel="noreferrer" target="_blank">{beer?.website_url}</a></span>}
           </div>
-          <a 
-            href={`https://www.google.com/maps/search/?api=1&query=${beer?.latitude},${beer?.longitude}`}
-            rel="noreferrer"
-            target="_blank"
+          <iframe
+            title='Brewery Map'
             className={styles.beerMap}
-          >
-            Check on map
-          </a>
+            src={`https://www.google.com/maps/embed/v1/search?q=${beer?.latitude},${beer?.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`}>
+          </iframe>
         </main>
       </section>
     </article>

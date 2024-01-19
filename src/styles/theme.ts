@@ -1,10 +1,10 @@
 import { createTheme } from '@mui/material/styles';
-import { orange, blue } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: blue[600],
+      main: "rgba(37, 89, 149, 1)",
     },
     secondary: {
       main: orange[600],

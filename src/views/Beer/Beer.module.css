@@ -6,7 +6,9 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 300px;
+    background-color: darkorange;
+    background-blend-mode: multiply;
+    min-height: 300px;
     justify-content: center;
     align-content: center;
     margin-bottom: 40px;
@@ -15,7 +17,8 @@
 }
 .beerTitle{
     font-size: 5rem;
-    color: rgba(28, 128, 241, 1);
+    color: white;
+    text-shadow: 4px 5px darkblue;
 }
 .beerDetails{
     display: grid;
@@ -25,15 +28,21 @@
 }
 .beerDetails span{
     display: flex;
-    background-color: rgba(28, 128, 241, 1);
+    flex-flow: column;
+    background-color: rgba(37, 89, 149, 1);
     padding: 20px;
     border-radius: 10px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    min-height: 200px;
+    align-items: center;
+    justify-content: center;
 }
 .beerDetails span b{
     color: rgba(241, 142, 28, 1);
-    margin-right: 10px;
+}
+.beerDetails span b svg{
+    font-size: 3.5rem;
 }
 .beerDetails span a{
     font-weight: bold;
@@ -43,25 +52,11 @@
     text-decoration: none;
 }
 .beerMap{
-    display: block;
     width: 100%;
-    max-width: 300px;
-    background-color: rgba(241, 142, 28, 1);
-    text-align: center;
-    padding: 40px 20px;
-    margin: 0 auto;
+    height: 300px;
     margin-top: 40px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
+    border: none;
 }
-.beerMap:hover{
-    background-color: rgba(241, 142, 28, 0.5);
-    color: rgba(28, 128, 241, 1);
-}
-
 @media screen and (max-width: 1024px) {
     .beerTitle{
         font-size: 4rem;

@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchData } from './utils';
-import { Beer } from '../../types';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Checkbox, Paper, TextField, Link } from '@mui/material';
-import styles from './Home.module.css';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
+
+import { fetchData } from './utils';
+import { Beer } from '../../types';
+
+import bgHome from '../../images/bgHome.jpg';
+import styles from './Home.module.css';
 
 const Home = () => {
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
@@ -59,6 +62,10 @@ const Home = () => {
   return (
     <article>
       <section>
+        <header style={{backgroundImage: `url(${bgHome})`}} className={styles.homeHeader}>
+          <h1 className={styles.homeTitle}>You've Got Questions.</h1>
+          <h2 className={styles.homeSubTitle}>We've Got Beer.</h2>
+        </header>
         <main>
           <Paper>
             <div className={styles.listContainer}>

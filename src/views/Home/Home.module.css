@@ -1,3 +1,30 @@
+.homeHeader{
+  display: grid;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: darkorange;
+  background-position: 100% 73%;
+  background-blend-mode: multiply;
+  min-height: 300px;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 40px;
+  text-align: center;
+  overflow: hidden;
+}
+.homeTitle{
+  font-size: 5rem;
+  color: white;
+  text-shadow: 4px 5px darkblue;
+  margin: 0;
+}
+.homeSubTitle{
+  font-size: 4rem;
+  color: white;
+  text-shadow: 4px 5px darkblue;
+  margin: 0;
+}
 .list {
   list-style: none;
 }
