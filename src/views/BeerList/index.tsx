@@ -19,7 +19,7 @@ const BeerList = () => {
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
   const [searchResult, setSearchResult] = useState<Array<Beer>>([]);
   const [totalBrewers, setTotalBrewers] = useState<Meta>();
-  const [perPage, setPerPage] = useState<number>(10);
+  const [perPage,] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>();
   const [listSort, setListSort] = useState<string>("asc");

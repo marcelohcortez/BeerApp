@@ -25,6 +25,7 @@ const Home = () => {
     }
   }, [beerList])
 
+  // use useMemo to reduce performance cost
   const filteredItems = useMemo(() => {
     // filter the beerList and return all items that match the query
     return beerList.filter(beerListItem => beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase()))
