@@ -18,26 +18,23 @@ const BeerList = () => {
   const navigate = useNavigate();
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
   const [searchResult, setSearchResult] = useState<Array<Beer>>([]);
-  const [totalBrewers, setTotalBrewers] = useState<Meta>();
-  const [perPage,] = useState<number>(10);
+  const [totalBrewers, setTotalBrewers] = useState<Meta>({total: ""} as Meta);
   const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>();
   const [listSort, setListSort] = useState<string>("asc");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const perPage = 10
+  const totalPages = Math.round(parseInt(totalBrewers.total) / perPage);
 
   useEffect( () => { 
     // Custom parameters for the fetchData function
     const customListParam = {per_page: perPage, page: page, sort: `type,name:${listSort}`};
 
     fetchData.bind(this, setBeerList, customListParam)();   
-  }, [page, perPage, listSort]);
+  }, [page, listSort]);
 
   useEffect( () => { 
-    fetchMetaData.bind(this, setTotalBrewers)();
-    if (totalBrewers) {
-      setTotalPages(Math.round(parseInt(totalBrewers?.total) / perPage));
-    }
-     
+    fetchMetaData.bind(this, setTotalBrewers)();     
   }, [beerList]);
 
   useEffect( () => { 

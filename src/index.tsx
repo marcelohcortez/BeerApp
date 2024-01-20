@@ -7,8 +7,6 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
 import './styles/global.css';
 
-import * as serviceWorkerRegistration from './service-worker-registration';
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
@@ -18,5 +16,3 @@ root.render(
     </ThemeProvider>
   </React.StrictMode>
 );
-
-serviceWorkerRegistration.register();
