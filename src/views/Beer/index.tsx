@@ -1,3 +1,8 @@
+/**
+ * Renders the selected brewery info.
+ * 
+ * @returns {JSX.Element} representing the brewery component.
+ */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

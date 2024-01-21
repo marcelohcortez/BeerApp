@@ -1,3 +1,9 @@
+/**
+ * Represents the Home component.
+ * This component displays a list of breweries and allows the user to filter and save their favorite ones.
+ * 
+ * @returns {JSX.Element} representing the home component.
+ */
 import { useEffect, useMemo, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Checkbox, Paper, TextField, Link } from '@mui/material';

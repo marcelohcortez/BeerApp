@@ -1,3 +1,11 @@
+/**
+ * Responsive drawer component for the menu.
+ *
+ * @component
+ * @param {Props} props - The component props.
+ * @param {React.ReactNode} props.children - The children components.
+ * @returns {JSX.Element} The rendered menu component.
+ */
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {

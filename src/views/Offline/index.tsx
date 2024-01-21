@@ -1,3 +1,7 @@
+/**
+ * Offline component.
+ * Represents a component that renders when the user is offline.
+ */
 import { useEffect, useState } from 'react';
 
 const Offline = () => {

@@ -1,3 +1,8 @@
+/**
+ * Renders a list of breweries with search and pagination functionality.
+ * 
+ * @returns {JSX.Element} representing the brewery list component.
+ */
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

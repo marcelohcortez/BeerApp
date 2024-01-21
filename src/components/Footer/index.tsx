@@ -1,3 +1,7 @@
+/**
+ * Footer component.
+ * Renders a footer with copyright information.
+ */
 import styles from './Footer.module.css';
 
 const Footer = () => {

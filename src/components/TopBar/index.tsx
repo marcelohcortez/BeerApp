@@ -1,3 +1,10 @@
+/**
+ * Represents the top bar component of the application.
+ * 
+ * @param {number} drawerWidth - The width of the drawer.
+ * @param {() => void} handleDrawerToggle - The function to handle the drawer toggle.
+ * @returns {JSX.Element} The rendered top bar component.
+ */
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 

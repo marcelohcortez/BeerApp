@@ -1,3 +1,8 @@
+/**
+ * Renders the NotFound component.
+ * 
+ * @returns The rendered NotFound component.
+ */
 const NotFound = () => {
   return (
     <article>
