@@ -1,11 +1,39 @@
-# Interview requirements
+# Beer Wiki
+Brewery searcher wit favorites functionality. Implements PWA approach with Workbox so the project can function if 'offline'.
 
-This repository contains the base code for recruitment exercise. Complete the tasks listed below and publish the solution on your github. Send us a link to your repository at least 1 day before the interview. 
-We will discuss the proposed solution during the interview. You should be ready to present the working application on your local machine.
+It uses the [Open Brewery DB](https://www.openbrewerydb.org/) as the API.
 
-## Recruitment Task
+The app is fully functional and responsive.
 
-- Beer page ~ style a cool beer page
-- Home page favourites ~ add a list of favourite beers, do not clean after page reload
-- Beer list filtering + pagination + sorting
-- Progressive Web App, offline
+*The project doesn't run with ***Nodejs*** and ***Express*** (purposely), so in order to test the PWA part you can just use the 'serve' as indicated on the instructions.*
+
+
+## Tech & 3rd party used in the project:
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Axios](https://axios-http.com/docs/intro)
+- [React Router ](https://reactrouter.com/)
+- [Workbox](https://developer.chrome.com/docs/workbox)
+- [Material UI](https://mui.com/)
+- [Webpack](https://webpack.js.org/)
+
+
+# How to run the project:
+- Clone the repository
+- Since we are not using Nodejs and Express, in the main folder, run
+```bash
+  REACT_APP_API=https://api.openbrewerydb.org/v1/ npm run build
+```
+- And then
+```bash
+  serve -s dist
+```
+- To test the 'offline' functionality, on your DevTools, in the tab 'Network', instead of the option 'No Throttling', select 'Offline'.
+
+*The cache stores anything that has been previously fetched in the API, so before going 'offline' visit some areas that fetch content from the API*
+
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
+
