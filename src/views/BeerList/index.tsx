@@ -89,6 +89,7 @@ const BeerList = () => {
             />
           </div>
           <List>
+            {/* verify if it's an array to avoid issues when building the project */}
             {Array.isArray(beerList) && beerList.map((beer) => (
               <ListItemButton 
                 key={beer.id} 
