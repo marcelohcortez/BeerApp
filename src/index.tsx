@@ -16,3 +16,10 @@ root.render(
     </ThemeProvider>
   </React.StrictMode>
 );
+
+// register the SW
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
