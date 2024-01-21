@@ -56,7 +56,8 @@
     width: 100%;
     height: 300px;
     margin-top: 40px;
-    border: none;
+    border: 2px solid rgba(37, 89, 149, 1);
+    border-radius: 10px;
 }
 @media screen and (max-width: 1024px) {
     .beerTitle{
