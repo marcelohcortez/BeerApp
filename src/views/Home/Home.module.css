@@ -1,11 +1,10 @@
 .homeHeader{
   display: grid;
   background-image: url("../../images/bgHome.jpg");
-  background-position: center;
+  background-position: 100% 73%;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: darkorange;
-  background-position: 100% 73%;
   background-blend-mode: multiply;
   min-height: 300px;
   justify-content: center;
