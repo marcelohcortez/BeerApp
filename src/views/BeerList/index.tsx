@@ -90,7 +90,7 @@ const BeerList = () => {
             />
           </div>
           <List>
-            {beerList.map((beer) => (
+            {Array.isArray(beerList) && beerList.map((beer) => (
               <ListItemButton 
                 key={beer.id} 
                 onClick={onBeerClick.bind(this, beer.id)}

@@ -26,7 +26,9 @@ const Home = () => {
   const filteredItems = useMemo(() => (
     // use useMemo to reduce performance cost
     // filter the beerList and return all items that match the query
-    beerList.filter(beerListItem => beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase()))
+    Array.isArray(beerList) 
+    ? beerList.filter(beerListItem => beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase()))
+    : []
   ), [beerList, filterQuery])
 
   const handleReloadList = () => {
@@ -128,8 +130,8 @@ const Home = () => {
                     </Link>
                   </li>
                 ))}
-                {!savedList.length && <p>No saved items</p>}
               </ul>
+              {!savedList.length && <p>No saved items</p>}
             </div>
           </Paper>
         </main>
