@@ -53,14 +53,8 @@ const BeerList = () => {
   }
 
   const handleSort = () => {
-    // done like this, but it could be done in a simpler way
-    // taking 'true' as if it was 'asc and 'false' as 'desc'
-    // that way this function wouldn't need to exist
-    if (listSort === "asc") {
-      return setListSort("desc");
-    }
-
-    return setListSort("asc");
+    const newSort = listSort === "asc" ? "desc" : "asc";
+    setListSort(newSort);
   }
 
   const handleSearchClick = (option: Beer | null) => {
