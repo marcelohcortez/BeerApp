@@ -1,5 +1,5 @@
 # Beer Wiki
-Brewery searcher wit favorites functionality. Implements PWA approach with Workbox so the project can function if 'offline'.
+Brewery searcher with localStorage favorites functionality. Implements PWA approach with Workbox so the project can function when 'offline'.
 
 It uses the [Open Brewery DB](https://www.openbrewerydb.org/) as the API.
 
@@ -12,7 +12,7 @@ The app is fully functional and responsive.
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Axios](https://axios-http.com/docs/intro)
-- [React Router ](https://reactrouter.com/)
+- [React Router](https://reactrouter.com/)
 - [Workbox](https://developer.chrome.com/docs/workbox)
 - [Material UI](https://mui.com/)
 - [Webpack](https://webpack.js.org/)
