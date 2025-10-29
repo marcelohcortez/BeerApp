@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import SportsBar from "@mui/icons-material/SportsBar";
 import { Beer } from "../../types";
-import styles from "../BeerList/BeerList.module.css";
+import styles from "../../views/BeerList/BeerList.module.css";
 
 interface BeerListItemProps {
   beer: Beer;

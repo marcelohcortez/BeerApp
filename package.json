@@ -2,6 +2,11 @@
   "name": "beer-wiki",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": [
+    "*.css",
+    "*.module.css",
+    "./src/styles/global.css"
+  ],
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

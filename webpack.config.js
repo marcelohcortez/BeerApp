@@ -151,10 +151,19 @@ module.exports = {
           test: /[\\/]node_modules[\\/]@mui[\\/]/,
           name: "mui",
           chunks: "all",
+          priority: 10,
+        },
+        react: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: "react",
+          chunks: "all",
+          priority: 20,
         },
       },
     },
     runtimeChunk: "single",
+    usedExports: true, // Enable tree shaking
+    sideEffects: false, // Mark the project as side-effect free for better tree shaking
   },
   output: {
     path: path.resolve(__dirname, "dist"),
