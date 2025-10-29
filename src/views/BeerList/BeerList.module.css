@@ -54,3 +54,13 @@ body .beerListItemAvatar {
   align-self: center;
   margin: 40px 0;
 }
+@media screen and (max-width: 1102px) {
+  body .beerListItemButton {
+    width: 31%;
+    flex-flow: column;
+    text-align: center;
+  }
+  body .MuiListItemAvatar-root {
+    min-width: auto;
+  }
+}

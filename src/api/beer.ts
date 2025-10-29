@@ -1,10 +1,12 @@
-import axios from 'axios';
-import { API } from './config';
-import { ApiParams } from '../types';
+import axios from "axios";
+import { ApiParams } from "../types";
+
+const API = process.env.REACT_APP_API;
 
 const getBeer = (id: string) => axios.get(`${API}breweries/${id}`);
 
-const getBeerList = (params?: ApiParams) => axios.get(`${API}breweries/`, { params });
+const getBeerList = (params?: ApiParams) =>
+  axios.get(`${API}breweries/`, { params });
 
 /**
  * @param size Int between 1 and 50. Default is 3.
@@ -16,10 +18,17 @@ const getRandomBeerList = (size = 3) =>
   });
 
 const searchBeerList = (query: string, isAutoComplete = false) =>
-  axios.get(`${API}breweries/${isAutoComplete ? 'autocomplete' : 'search'}`, {
+  axios.get(`${API}breweries/${isAutoComplete ? "autocomplete" : "search"}`, {
     params: { query },
   });
 
-const getBeerMetaData = (params?: ApiParams) => axios.get(`${API}breweries/meta`, { params });
+const getBeerMetaData = (params?: ApiParams) =>
+  axios.get(`${API}breweries/meta`, { params });
 
-export { getBeer, getBeerList, getRandomBeerList, searchBeerList, getBeerMetaData };
+export {
+  getBeer,
+  getBeerList,
+  getRandomBeerList,
+  searchBeerList,
+  getBeerMetaData,
+};
