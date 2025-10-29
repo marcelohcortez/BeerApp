@@ -3,7 +3,7 @@
  *
  * @returns {JSX.Element} representing the brewery list component.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -24,6 +24,7 @@ import SortIcon from "@mui/icons-material/Sort";
 
 import { Beer, Meta } from "../../types";
 import { fetchData, fetchMetaData, searchData } from "./utils";
+import BeerListItem from "../../components/BeerListItem";
 import styles from "./BeerList.module.css";
 
 const BeerList = () => {
@@ -38,6 +39,25 @@ const BeerList = () => {
   const perPage = 9;
   const totalPages = Math.round(parseInt(totalBrewers.total) / perPage);
 
+  // Memoize callback functions to prevent unnecessary re-renders
+  const onBeerClick = useCallback((id: string) => navigate(`/beer/${id}`), [navigate]);
+
+  const handleChange = useCallback((value: number) => {
+    setPage(value);
+  }, []);
+
+  const handleSort = useCallback(() => {
+    const newSort = listSort === "asc" ? "desc" : "asc";
+    setListSort(newSort);
+  }, [listSort]);
+
+  const handleSearchClick = useCallback((option: Beer | null) => {
+    if (option) {
+      window.location.href = `beer/${option?.id}`;
+    }
+  }, []);
+
+  // UseEffect hooks for data fetching
   useEffect(() => {
     // Custom parameters for the fetchData function
     const customListParam = {
@@ -56,23 +76,6 @@ const BeerList = () => {
   useEffect(() => {
     searchData.bind(this, setSearchResult, searchQuery)();
   }, [searchQuery]);
-
-  const onBeerClick = (id: string) => navigate(`/beer/${id}`);
-
-  const handleChange = (value: number) => {
-    setPage(value);
-  };
-
-  const handleSort = () => {
-    const newSort = listSort === "asc" ? "desc" : "asc";
-    setListSort(newSort);
-  };
-
-  const handleSearchClick = (option: Beer | null) => {
-    if (option) {
-      window.location.href = `beer/${option?.id}`;
-    }
-  };
 
   const loading = () => {
     return <CircularProgress className={styles.loadingIcon} disableShrink />;
@@ -147,30 +150,11 @@ const BeerList = () => {
                 {/* verify if it's an array to avoid issues when building the project */}
                 {Array.isArray(beerList) &&
                   beerList.map((beer) => (
-                    <ListItemButton
+                    <BeerListItem
                       key={beer.id}
-                      onClick={onBeerClick.bind(this, beer.id)}
-                      className={styles.beerListItemButton}
-                      role="listitem"
-                      aria-label={`View details for ${beer.name}, ${beer.brewery_type} brewery`}
-                      component="li"
-                    >
-                      <ListItemAvatar>
-                        <Avatar
-                          className={styles.beerListItemAvatar}
-                          aria-hidden="true"
-                        >
-                          <SportsBar />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primaryTypographyProps={{
-                          style: { fontWeight: "bold" },
-                        }}
-                        primary={beer.name}
-                        secondary={`Type: ${beer.brewery_type}`}
-                      />
-                    </ListItemButton>
+                      beer={beer}
+                      onClick={onBeerClick}
+                    />
                   ))}
               </List>
               <Stack
@@ -196,4 +180,4 @@ const BeerList = () => {
   );
 };
 
-export default BeerList;
+export default memo(BeerList);

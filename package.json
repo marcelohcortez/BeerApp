@@ -35,6 +35,7 @@
     "typescript": "^4.9.5",
     "typescript-plugin-css-modules": "^5.0.1",
     "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "workbox-webpack-plugin": "^7.0.0"
@@ -42,6 +43,7 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.config.js",
+    "build:analyze": "webpack --config webpack.config.js --profile --json > dist/stats.json && npx webpack-bundle-analyzer dist/stats.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

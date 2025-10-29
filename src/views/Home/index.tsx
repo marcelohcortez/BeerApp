@@ -4,7 +4,7 @@
  *
  * @returns {JSX.Element} representing the home component.
  */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback, memo } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   Button,
@@ -61,13 +61,14 @@ const Home = () => {
       : [];
   }, [beerList, filterQuery]);
 
-  const handleReloadList = () => {
+  // Use useCallback to memoize functions and prevent unnecessary re-renders
+  const handleReloadList = useCallback(() => {
     // clear query data and fetch random breweries again
     setFilterQuery("");
     fetchData.bind(this, setBeerList)();
-  };
+  }, []);
 
-  const handleClickFavorite = (beer: Beer): void => {
+  const handleClickFavorite = useCallback((beer: Beer): void => {
     // check if clicked item is already in the fav list or not
     if (savedList.includes(beer)) {
       // save to the localStorage before updating the state
@@ -90,15 +91,16 @@ const Home = () => {
         return updatedList;
       });
     }
-  };
+  }, [savedList]);
 
-  const handleClearFavorites = (): void => {
+  const handleClearFavorites = useCallback((): void => {
     setSavedList([]);
     window.localStorage.setItem("BEER_FAVORITES", JSON.stringify([]));
-  };
+  }, []);
 
-  const isFavorite = (beer: Beer): boolean =>
-    savedList.includes(beer) ? true : false;
+  // Memoize favorite check function to avoid recalculation
+  const isFavorite = useCallback((beer: Beer): boolean =>
+    savedList.some(saved => saved.id === beer.id), [savedList]);
 
   return (
     <article>
@@ -193,4 +195,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

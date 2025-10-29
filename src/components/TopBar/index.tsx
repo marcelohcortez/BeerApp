@@ -9,6 +9,7 @@ import { AppBar, IconButton, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import beerWikiLogo from "../../images/beerWikiLogo.png";
+import OptimizedImage from "../OptimizedImage";
 import styles from "./TopBar.module.css";
 
 interface Props {
@@ -38,11 +39,12 @@ const TopBar = (props: Props) => {
         >
           <MenuIcon />
         </IconButton>
-        <img
+        <OptimizedImage
           src={beerWikiLogo}
-          className={styles.topBarLogo}
           alt="Beer Wiki - Navigate to homepage"
-          role="img"
+          className={styles.topBarLogo}
+          width={200}
+          height={40}
         />
       </Toolbar>
     </AppBar>

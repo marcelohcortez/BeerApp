@@ -3,7 +3,7 @@
  *
  * @returns {JSX.Element} representing the brewery component.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
@@ -23,8 +23,13 @@ const Beer = () => {
   const { id } = useParams();
   const [beer, setBeer] = useState<IBeer>();
 
-  // eslint-disable-next-line
-  useEffect(fetchData.bind(this, setBeer, id), [id]);
+  const loadBeerData = useCallback(() => {
+    if (id) {
+      fetchData(setBeer, id);
+    }
+  }, [id]);
+
+  useEffect(loadBeerData, [loadBeerData]);
 
   return (
     <article role="main" aria-labelledby="brewery-name">
@@ -105,4 +110,4 @@ const Beer = () => {
   );
 };
 
-export default Beer;
+export default memo(Beer);
