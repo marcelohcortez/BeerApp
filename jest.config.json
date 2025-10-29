@@ -2,11 +2,21 @@
   "preset": "ts-jest",
   "testEnvironment": "jsdom",
   "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
-  "moduleNameMapping": {
+  "moduleNameMapper": {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
     "^@/(.*)$": "<rootDir>/src/$1"
   },
+  "transformIgnorePatterns": ["node_modules/(?!(axios)/)"],
+  "testMatch": [
+    "**/__tests__/**/*.(test|spec).(ts|tsx|js|jsx)",
+    "**/*.(test|spec).(ts|tsx|js|jsx)"
+  ],
+  "testPathIgnorePatterns": [
+    "node_modules/",
+    "src/__tests__/mocks/",
+    "src/__tests__/utils/"
+  ],
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest",
     "^.+\\.(js|jsx)$": "babel-jest"
@@ -18,5 +28,14 @@
     "!src/sw.js"
   ],
   "coverageReporters": ["text", "lcov", "html"],
-  "coverageDirectory": "coverage"
+  "coverageDirectory": "coverage",
+  "coverageThreshold": {
+    "global": {
+      "branches": 70,
+      "functions": 70,
+      "lines": 70,
+      "statements": 70
+    }
+  },
+  "verbose": true
 }

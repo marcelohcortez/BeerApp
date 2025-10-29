@@ -8,7 +8,7 @@ const capitalize = (str: string | undefined): string => {
 
 const cleanPhoneNumber = (phoneNumber: string | undefined): string => {
   if (!phoneNumber) return "";
-  return phoneNumber.replace(/[\s+-]/g, "");
+  return phoneNumber.replace(/[\s+\-()]/g, "");
 };
 
 export { getStringForApi, capitalize, cleanPhoneNumber };
