@@ -38,7 +38,7 @@ The app is fully functional and responsive.
 - Since we are not using Nodejs and Express, in the main folder, run
 
 ```bash
-  REACT_APP_API=https://api.openbrewerydb.org/v1/ npm run build
+  $env:REACT_APP_API="https://api.openbrewerydb.org/v1/"; npm run build
 ```
 
 - And then start the server with the 'dist' folder as the root

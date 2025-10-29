@@ -22,7 +22,7 @@ const getClientEnvironment = () => {
         return env;
       },
       {
-        NODE_ENV: process.env.NODE_ENV || "production",
+        NODE_ENV: process.env.NODE_ENV || "development",
         // Fallback for REACT_APP_API if not set
         REACT_APP_API:
           process.env.REACT_APP_API || "https://api.openbrewerydb.org/v1/",
@@ -43,26 +43,36 @@ const getClientEnvironment = () => {
 const env = getClientEnvironment();
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: "./src/index.tsx",
-  devtool: "source-map",
+  devtool: "eval-source-map",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    historyApiFallback: true,
+    compress: true,
+  },
   module: {
     rules: [
       {
-        // Handle tsx files with optimization for production
+        // Handle tsx files
         test: /\.tsx?$/,
         use: [
           {
             loader: "ts-loader",
             options: {
-              configFile: "tsconfig.json",
+              transpileOnly: true, // Faster builds in dev
             },
           },
         ],
         exclude: /node_modules/,
       },
       {
-        // Handle CSS modules with optimized class names for production
+        // Handle CSS modules
         test: /\.module\.css$/,
         use: [
           "style-loader",
@@ -70,9 +80,9 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[hash:base64:8]", // Shorter class names for production
+                localIdentName: "[name]__[local]--[hash:base64:5]", // Better debugging in dev
               },
-              sourceMap: false, // Disable source maps for CSS in production
+              sourceMap: true,
             },
           },
         ],
@@ -80,15 +90,23 @@ module.exports = {
       {
         // Handle regular CSS files
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
         exclude: /\.module\.css$/,
       },
       {
-        // Handle images with hash for cache busting
+        // Handle images
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         type: "asset/resource",
         generator: {
-          filename: "images/[name].[contenthash:8][ext]",
+          filename: "images/[name][ext]",
         },
       },
     ],
@@ -100,32 +118,12 @@ module.exports = {
     },
   },
   plugins: [
-    // Generate optimized HTML file
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       inject: "body",
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
     }),
-    // Service worker injection for PWA
-    new InjectManifest({
-      swSrc: "./src/sw.js",
-      swDest: "service-worker.js",
-      exclude: [/\.map$/, /manifest$/, /\.htaccess$/],
-    }),
-    // Environment variables for production
     new webpack.DefinePlugin(env.stringified),
-    // Copy static assets
+    new webpack.HotModuleReplacementPlugin(),
     new CopyPlugin({
       patterns: [
         {
@@ -141,32 +139,12 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: "all",
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-        mui: {
-          test: /[\\/]node_modules[\\/]@mui[\\/]/,
-          name: "mui",
-          chunks: "all",
-        },
-      },
     },
-    runtimeChunk: "single",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash:8].js",
-    chunkFilename: "[name].[contenthash:8].chunk.js",
+    filename: "[name].bundle.js",
     publicPath: "/",
     clean: true,
-    assetModuleFilename: "static/[name].[contenthash:8][ext]",
-  },
-  performance: {
-    maxAssetSize: 512000,
-    maxEntrypointSize: 512000,
-    hints: "warning",
   },
 };
