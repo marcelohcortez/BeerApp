@@ -1,13 +1,13 @@
 .menuList {
   background-image: url("../../images/bgGlobal.png");
-  background-color: rgba(37, 89, 149, 1);
-  background-blend-mode: color-burn;
+  background-blend-mode: difference;
+  background-color: white;
   height: 100%;
 }
-.menuListItem:hover{
+.menuListItem:hover {
   background-color: rgba(37, 89, 149, 1);
 }
-.menuListItem span{
+.menuListItem span {
   font-weight: bold;
   font-size: 1.3rem;
   color: rgba(241, 142, 28, 1);

@@ -1,33 +1,56 @@
-.beerListHeader{
-    display: grid;
-    background-image: url("../../images/bgBeerList.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: darkorange;
-    background-blend-mode: multiply;
-    min-height: 300px;
-    justify-content: center;
-    align-content: center;
-    margin-bottom: 40px;
-    text-align: center;
-    overflow: hidden;
+.beerListHeader {
+  display: grid;
+  background-image: url("../../images/bgBeerList.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: darkorange;
+  background-blend-mode: multiply;
+  min-height: 300px;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 40px;
+  text-align: center;
+  overflow: hidden;
 }
-.beerTitle{
-    font-size: 5rem;
-    color: white;
-    text-shadow: 4px 5px darkblue;
+.beerTitle {
+  font-size: 5rem;
+  color: white;
+  text-shadow: 4px 5px darkblue;
 }
-.beerListTopBar{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    align-items: center;
+.beerListTopBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 30px;
 }
-body .beerListItemButton:hover{
-    background-color: rgba(255, 200, 87, 1);
+.breweriesSearch {
+  width: 100%;
 }
-.beerListPagination{
-    align-self: center;
-    margin: 40px 0;
+.beerList {
+  display: flex;
+  flex-flow: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1em;
+}
+body .beerListItemButton {
+  width: 32%;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+.beerListItemButton:hover {
+  background-color: rgba(255, 200, 87, 1);
+}
+body .beerListItemAvatar {
+  background-color: rgba(241, 142, 28, 1);
+}
+.beerListPaginationContainer {
+  margin-top: 40px;
+}
+.beerListPagination {
+  align-self: center;
+  margin: 40px 0;
 }

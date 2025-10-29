@@ -1,4 +1,4 @@
-.homeHeader{
+.homeHeader {
   display: grid;
   background-image: url("../../images/bgHome.jpg");
   background-position: 100% 73%;
@@ -9,24 +9,28 @@
   min-height: 300px;
   justify-content: center;
   align-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   text-align: center;
   overflow: hidden;
 }
-.homeTitle{
+
+.homeTitle {
   font-size: 5rem;
   color: white;
   text-shadow: 4px 5px darkblue;
   margin: 0;
 }
-.homeSubTitle{
+
+.homeSubTitle {
   font-size: 4rem;
   color: white;
   text-shadow: 4px 5px darkblue;
   margin: 0;
 }
+
 .list {
   list-style: none;
+  margin-top: 20px;
 }
 
 .listContainer {
@@ -39,4 +43,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+}
+
+.searchField {
+  width: 100%;
+}
+
+.buttonReload {
+  width: 170px;
+}
+
+@media screen and (max-width: 767px) {
+  .listHeader {
+    flex-direction: column;
+  }
+  .list {
+    padding: 0;
+  }
+  .homeTitle {
+    font-size: 3rem;
+  }
+  .homeSubTitle {
+    font-size: 2rem;
+  }
 }

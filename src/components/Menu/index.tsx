@@ -6,8 +6,8 @@
  * @param {React.ReactNode} props.children - The children components.
  * @returns {JSX.Element} The rendered menu component.
  */
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Drawer,
@@ -18,12 +18,12 @@ import {
   ListItemText,
   Toolbar,
   Link,
-} from '@mui/material';
-import SportsBar from '@mui/icons-material/SportsBar';
-import HomeIcon from '@mui/icons-material/Home';
+} from "@mui/material";
+import SportsBar from "@mui/icons-material/SportsBar";
+import HomeIcon from "@mui/icons-material/Home";
 
-import TopBar from '../TopBar';
-import styles from './Menu.module.css';
+import TopBar from "../TopBar";
+import styles from "./Menu.module.css";
 
 const drawerWidth = 240;
 
@@ -40,33 +40,24 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <>
-      
-      <List 
-        className={styles.menuList}
-      >
+      <List className={styles.menuList}>
         <Link component={RouterLink} to={`/`}>
-          <ListItem 
-            disablePadding 
-            className={styles.menuListItem}
-          >
+          <ListItem disablePadding className={styles.menuListItem}>
             <ListItemButton>
               <ListItemIcon>
-                <HomeIcon color={'secondary'} />
+                <HomeIcon color={"secondary"} />
               </ListItemIcon>
-              <ListItemText primary='Home' color={'secondary'}/>
+              <ListItemText primary="Home" color={"secondary"} />
             </ListItemButton>
           </ListItem>
         </Link>
         <Link component={RouterLink} to={`/beer`}>
-          <ListItem 
-            disablePadding
-            className={styles.menuListItem}
-          >
+          <ListItem disablePadding className={styles.menuListItem}>
             <ListItemButton>
               <ListItemIcon>
-                <SportsBar  color={'secondary'} />
+                <SportsBar color={"secondary"} />
               </ListItemIcon>
-              <ListItemText primary='Beer List' color={'secondary'}/>
+              <ListItemText primary="Breweries List" color={"secondary"} />
             </ListItemButton>
           </ListItem>
         </Link>
@@ -75,32 +66,41 @@ export default function ResponsiveDrawer(props: Props) {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <TopBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
+    <Box sx={{ display: "flex" }}>
+      <TopBar
+        drawerWidth={drawerWidth}
+        handleDrawerToggle={handleDrawerToggle}
+      />
       <Box
-        component='nav'
+        component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label='mailbox folders'
+        aria-label="mailbox folders"
       >
         <Drawer
-          variant='temporary'
+          variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
         </Drawer>
         <Drawer
-          variant='permanent'
+          variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
           open
         >
@@ -108,11 +108,11 @@ export default function ResponsiveDrawer(props: Props) {
         </Drawer>
       </Box>
       <Box
-        component='main'
+        component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)`, background: '#f7f7f7' },
+          width: { sm: `calc(100% - ${drawerWidth}px)`, background: "#f7f7f7" },
         }}
       >
         <Toolbar />
