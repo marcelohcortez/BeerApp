@@ -40,21 +40,36 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <>
-      <List className={styles.menuList}>
-        <Link component={RouterLink} to={`/`}>
+      <List
+        className={styles.menuList}
+        component="nav"
+        aria-label="Main navigation"
+        role="navigation"
+      >
+        <Link
+          component={RouterLink}
+          to={`/`}
+          underline="none"
+          aria-label="Navigate to home page"
+        >
           <ListItem disablePadding className={styles.menuListItem}>
-            <ListItemButton>
-              <ListItemIcon>
+            <ListItemButton role="menuitem" aria-label="Home page">
+              <ListItemIcon aria-hidden="true">
                 <HomeIcon color={"secondary"} />
               </ListItemIcon>
               <ListItemText primary="Home" color={"secondary"} />
             </ListItemButton>
           </ListItem>
         </Link>
-        <Link component={RouterLink} to={`/beer`}>
+        <Link
+          component={RouterLink}
+          to={`/beer`}
+          underline="none"
+          aria-label="Navigate to breweries list"
+        >
           <ListItem disablePadding className={styles.menuListItem}>
-            <ListItemButton>
-              <ListItemIcon>
+            <ListItemButton role="menuitem" aria-label="Breweries list page">
+              <ListItemIcon aria-hidden="true">
                 <SportsBar color={"secondary"} />
               </ListItemIcon>
               <ListItemText primary="Breweries List" color={"secondary"} />
@@ -67,6 +82,11 @@ export default function ResponsiveDrawer(props: Props) {
 
   return (
     <Box sx={{ display: "flex" }}>
+      {/* Skip to main content link for keyboard users */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       <TopBar
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
@@ -74,7 +94,7 @@ export default function ResponsiveDrawer(props: Props) {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        aria-label="Main navigation drawer"
       >
         <Drawer
           variant="temporary"
@@ -90,6 +110,7 @@ export default function ResponsiveDrawer(props: Props) {
               width: drawerWidth,
             },
           }}
+          aria-label="Mobile navigation menu"
         >
           {drawer}
         </Drawer>
@@ -103,6 +124,7 @@ export default function ResponsiveDrawer(props: Props) {
             },
           }}
           open
+          aria-label="Desktop navigation menu"
         >
           {drawer}
         </Drawer>
@@ -114,6 +136,10 @@ export default function ResponsiveDrawer(props: Props) {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)`, background: "#f7f7f7" },
         }}
+        role="main"
+        aria-label="Main content area"
+        id="main-content"
+        tabIndex={-1}
       >
         <Toolbar />
         {props.children}

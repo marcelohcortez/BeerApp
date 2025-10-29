@@ -79,13 +79,19 @@ const BeerList = () => {
   };
 
   return (
-    <article>
+    <article role="main" aria-labelledby="breweries-title">
       <section>
         <header className={styles.beerListHeader}>
-          <h1 className={styles.beerTitle}>Breweries Listing</h1>
+          <h1 id="breweries-title" className={styles.beerTitle}>
+            Breweries Listing
+          </h1>
         </header>
         <main>
-          <div className={styles.beerListTopBar}>
+          <div
+            className={styles.beerListTopBar}
+            role="search"
+            aria-label="Search and sort controls"
+          >
             {/* This search looks up on the entire API */}
             <Autocomplete
               className={styles.breweriesSearch}
@@ -93,20 +99,51 @@ const BeerList = () => {
               id="breweriesSearch"
               options={searchResult}
               getOptionLabel={(option) => option.name}
-              renderInput={(params) => <TextField {...params} label="Search" />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Search breweries"
+                  aria-label="Search for breweries by name"
+                  placeholder="Type brewery name..."
+                />
+              )}
               onInputChange={(_, value) => setSearchQuery(value)}
               onChange={(_, option) => handleSearchClick(option)}
+              aria-label="Search breweries autocomplete"
             />
             <SortIcon
               fontSize={"large"}
               sx={{ ":hover": { color: orange[600], cursor: "pointer" } }}
               onClick={() => handleSort()}
+              role="button"
+              aria-label={`Sort breweries ${
+                listSort === "asc" ? "descending" : "ascending"
+              }`}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleSort();
+                }
+              }}
             />
           </div>
-          {beerList.length === 0 && loading()}
+          {beerList.length === 0 && (
+            <div
+              role="status"
+              aria-live="polite"
+              aria-label="Loading breweries"
+            >
+              <CircularProgress className={styles.loadingIcon} disableShrink />
+              <span className="sr-only">Loading breweries...</span>
+            </div>
+          )}
           {beerList.length > 0 && (
-            <>
-              <List className={styles.beerList}>
+            <section aria-labelledby="breweries-title">
+              <List
+                className={styles.beerList}
+                role="list"
+                aria-label="List of breweries"
+              >
                 {/* verify if it's an array to avoid issues when building the project */}
                 {Array.isArray(beerList) &&
                   beerList.map((beer) => (
@@ -114,9 +151,15 @@ const BeerList = () => {
                       key={beer.id}
                       onClick={onBeerClick.bind(this, beer.id)}
                       className={styles.beerListItemButton}
+                      role="listitem"
+                      aria-label={`View details for ${beer.name}, ${beer.brewery_type} brewery`}
+                      component="li"
                     >
                       <ListItemAvatar>
-                        <Avatar className={styles.beerListItemAvatar}>
+                        <Avatar
+                          className={styles.beerListItemAvatar}
+                          aria-hidden="true"
+                        >
                           <SportsBar />
                         </Avatar>
                       </ListItemAvatar>
@@ -130,16 +173,22 @@ const BeerList = () => {
                     </ListItemButton>
                   ))}
               </List>
-              <Stack className={styles.beerListPaginationContainer} spacing={2}>
+              <Stack
+                className={styles.beerListPaginationContainer}
+                spacing={2}
+                role="navigation"
+                aria-label="Breweries pagination"
+              >
                 <Pagination
                   color={"primary"}
                   count={totalPages}
                   page={page}
                   onChange={(_, value) => handleChange(value)}
                   className={styles.beerListPagination}
+                  aria-label={`Brewery list pagination, currently on page ${page} of ${totalPages}`}
                 />
               </Stack>
-            </>
+            </section>
           )}
         </main>
       </section>

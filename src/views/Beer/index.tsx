@@ -27,54 +27,77 @@ const Beer = () => {
   useEffect(fetchData.bind(this, setBeer, id), [id]);
 
   return (
-    <article>
+    <article role="main" aria-labelledby="brewery-name">
       <section className={styles.beerSection}>
         <header className={styles.beerHeader}>
-          <h1 className={styles.beerTitle}>{beer?.name}</h1>
+          <h1 id="brewery-name" className={styles.beerTitle}>
+            {beer?.name}
+          </h1>
         </header>
         <main>
-          <div className={styles.beerDetails}>
-            <span className={styles.beerDetail}>
-              <StoreIcon />
+          <section className={styles.beerDetails} aria-label="Brewery details">
+            <div className={styles.beerDetail}>
+              <StoreIcon aria-hidden="true" />
               <p>
+                <span className="sr-only">Brewery type: </span>
                 <b>Type:</b> {capitalize(beer?.brewery_type)}
               </p>
-            </span>
-            <span className={styles.beerDetail}>
-              <PinDropIcon />
-              <p>{beer?.address_1}</p>
-            </span>
-            <span className={styles.beerDetail}>
-              <LocationCityIcon />
-              <p>{beer?.city}</p>
-            </span>
-            <span className={styles.beerDetail}>
-              <FlagIcon />
-              <p>{beer?.country}</p>
-            </span>
-            <span className={styles.beerDetail}>
-              <LocalPhoneIcon />
+            </div>
+            <div className={styles.beerDetail}>
+              <PinDropIcon aria-hidden="true" />
               <p>
-                <a href={`tel:+${cleanPhoneNumber(beer?.phone)}`}>
+                <span className="sr-only">Address: </span>
+                {beer?.address_1}
+              </p>
+            </div>
+            <div className={styles.beerDetail}>
+              <LocationCityIcon aria-hidden="true" />
+              <p>
+                <span className="sr-only">City: </span>
+                {beer?.city}
+              </p>
+            </div>
+            <div className={styles.beerDetail}>
+              <FlagIcon aria-hidden="true" />
+              <p>
+                <span className="sr-only">Country: </span>
+                {beer?.country}
+              </p>
+            </div>
+            <div className={styles.beerDetail}>
+              <LocalPhoneIcon aria-hidden="true" />
+              <p>
+                <span className="sr-only">Phone number: </span>
+                <a
+                  href={`tel:+${cleanPhoneNumber(beer?.phone)}`}
+                  aria-label={`Call ${beer?.name} at ${beer?.phone}`}
+                >
                   {beer?.phone}
                 </a>
               </p>
-            </span>
+            </div>
             {beer?.website_url && (
-              <span className={styles.beerDetail}>
-                <PublicIcon />
+              <div className={styles.beerDetail}>
+                <PublicIcon aria-hidden="true" />
                 <p>
-                  <a href={beer?.website_url} rel="noreferrer" target="_blank">
+                  <span className="sr-only">Website: </span>
+                  <a
+                    href={beer?.website_url}
+                    rel="noreferrer"
+                    target="_blank"
+                    aria-label={`Visit ${beer?.name} website (opens in new tab)`}
+                  >
                     Click to visit
                   </a>
                 </p>
-              </span>
+              </div>
             )}
-          </div>
+          </section>
           <iframe
-            title="Brewery Map"
+            title={`Map showing location of ${beer?.name}`}
             className={styles.beerMap}
             src={`https://www.google.com/maps/embed/v1/search?q=${beer?.latitude},${beer?.longitude}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`}
+            aria-label={`Interactive map showing the location of ${beer?.name}`}
           ></iframe>
         </main>
       </section>
