@@ -1,6 +1,7 @@
 const { InjectManifest } = require("workbox-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const path = require("path");
 
@@ -9,7 +10,7 @@ try {
   require("dotenv").config();
 } catch (e) {
   // dotenv not installed, use process.env directly
-  console.log("dotenv not found, using process.env directly");
+  // Note: Console output removed for production builds
 }
 
 // Get REACT_APP_ environment variables
@@ -139,6 +140,20 @@ module.exports = {
     }),
   ],
   optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            // Remove console statements in production
+            drop_console: true,
+            drop_debugger: true,
+          },
+          mangle: true,
+        },
+        extractComments: false,
+      }),
+    ],
     splitChunks: {
       chunks: "all",
       cacheGroups: {

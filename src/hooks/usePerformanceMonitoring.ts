@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import { performanceLogger } from "../utils/logger";
 
 // Extend Window interface for gtag
 declare global {
@@ -65,7 +66,7 @@ export const usePerformanceMonitoring = (
       const status = isGood ? "✅" : "⚠️";
 
       if (reportToConsole) {
-        console.log(
+        performanceLogger.log(
           `${status} ${name}: ${value.toFixed(2)}${
             name.includes("Delay") || name.includes("Paint") ? "ms" : ""
           }`
@@ -101,7 +102,9 @@ export const usePerformanceMonitoring = (
         });
         observer.observe({ entryTypes: ["paint"] });
       } catch (e) {
-        console.warn("Performance Observer not supported for paint metrics");
+        performanceLogger.warn(
+          "Performance Observer not supported for paint metrics"
+        );
       }
 
       // Largest Contentful Paint
@@ -117,7 +120,9 @@ export const usePerformanceMonitoring = (
         });
         lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
       } catch (e) {
-        console.warn("Performance Observer not supported for LCP metrics");
+        performanceLogger.warn(
+          "Performance Observer not supported for LCP metrics"
+        );
       }
 
       // First Input Delay
@@ -134,7 +139,9 @@ export const usePerformanceMonitoring = (
         });
         fidObserver.observe({ entryTypes: ["first-input"] });
       } catch (e) {
-        console.warn("Performance Observer not supported for FID metrics");
+        performanceLogger.warn(
+          "Performance Observer not supported for FID metrics"
+        );
       }
 
       // Cumulative Layout Shift
@@ -151,7 +158,9 @@ export const usePerformanceMonitoring = (
         });
         clsObserver.observe({ entryTypes: ["layout-shift"] });
       } catch (e) {
-        console.warn("Performance Observer not supported for CLS metrics");
+        performanceLogger.warn(
+          "Performance Observer not supported for CLS metrics"
+        );
       }
     }
 
@@ -195,10 +204,14 @@ export const usePerformanceMonitoring = (
     });
 
     if (reportToConsole) {
-      console.log("📊 Resource Performance:");
-      console.log(`  Total JS Size: ${(totalJSSize / 1024).toFixed(2)} KB`);
-      console.log(`  Total JS Load Time: ${totalJSLoadTime.toFixed(2)}ms`);
-      console.log(`  JS Resources: ${jsResources.length}`);
+      performanceLogger.log("📊 Resource Performance:");
+      performanceLogger.log(
+        `  Total JS Size: ${(totalJSSize / 1024).toFixed(2)} KB`
+      );
+      performanceLogger.log(
+        `  Total JS Load Time: ${totalJSLoadTime.toFixed(2)}ms`
+      );
+      performanceLogger.log(`  JS Resources: ${jsResources.length}`);
     }
   }, [reportToConsole]);
 
@@ -239,7 +252,7 @@ export const useRenderTime = (componentName: string) => {
     return () => {
       const endTime = performance.now();
       const renderTime = endTime - startTime;
-      console.log(
+      performanceLogger.log(
         `🎭 ${componentName} render time: ${renderTime.toFixed(2)}ms`
       );
     };
@@ -253,7 +266,7 @@ export const useMemoryMonitoring = () => {
   useEffect(() => {
     if ("memory" in performance) {
       const memory = (performance as any).memory;
-      console.log("💾 Memory Usage:", {
+      performanceLogger.log("💾 Memory Usage:", {
         used: `${(memory.usedJSHeapSize / 1048576).toFixed(2)} MB`,
         total: `${(memory.totalJSHeapSize / 1048576).toFixed(2)} MB`,
         limit: `${(memory.jsHeapSizeLimit / 1048576).toFixed(2)} MB`,
