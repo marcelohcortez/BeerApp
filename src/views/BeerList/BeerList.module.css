@@ -28,6 +28,10 @@
 .breweriesSearch {
   width: 100%;
 }
+body .loadingIcon {
+  margin: 60px auto;
+  display: block;
+}
 .beerList {
   display: flex;
   flex-flow: wrap;

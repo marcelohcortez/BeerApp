@@ -13,32 +13,31 @@
   text-align: center;
   overflow: hidden;
 }
-
 .homeTitle {
   font-size: 5rem;
   color: white;
   text-shadow: 4px 5px darkblue;
   margin: 0;
 }
-
 .homeSubTitle {
   font-size: 4rem;
   color: white;
   text-shadow: 4px 5px darkblue;
   margin: 0;
 }
-
+body .loadingIcon {
+  margin: 60px auto;
+  display: block;
+}
 .list {
   list-style: none;
   margin-top: 20px;
 }
-
 .listContainer {
   padding: 20px;
   margin-bottom: 20px;
   background: #fff;
 }
-
 .listHeader {
   display: flex;
   align-items: center;
@@ -46,13 +45,17 @@
   gap: 30px;
   width: 100%;
 }
-
 .searchField {
   width: 100%;
 }
-
 .buttonReload {
   width: 170px;
+}
+.noItemsFound {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 767px) {

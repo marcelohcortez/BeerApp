@@ -6,7 +6,14 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Checkbox, Paper, TextField, Link } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Paper,
+  TextField,
+  Link,
+  CircularProgress,
+} from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 import { fetchData } from "./utils";
@@ -18,6 +25,7 @@ const Home = () => {
   const [beerList, setBeerList] = useState<Array<Beer>>([]);
   const [savedList, setSavedList] = useState<Array<Beer>>([]);
   const [filterQuery, setFilterQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData.bind(this, setBeerList)();
@@ -29,17 +37,29 @@ const Home = () => {
     }
   }, []);
 
-  const filteredItems = useMemo(
-    () =>
-      // use useMemo to reduce performance cost
-      // filter the beerList and return all items that match the query
-      Array.isArray(beerList)
-        ? beerList.filter((beerListItem) =>
-            beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase())
-          )
-        : [],
-    [beerList, filterQuery]
-  );
+  // Use useEffect to manage loading state when dependencies change
+  useEffect(() => {
+    if (Array.isArray(beerList) && beerList.length > 0) {
+      setLoading(true);
+
+      // Use a small timeout to show loading state briefly
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [beerList, filterQuery]);
+
+  // Use useMemo to avoid recalculating if dependencies haven't changed
+  const filteredItems = useMemo(() => {
+    // Only filter if we have data and not loading
+    return Array.isArray(beerList)
+      ? beerList.filter((beerListItem) =>
+          beerListItem.name.toLowerCase().includes(filterQuery.toLowerCase())
+        )
+      : [];
+  }, [beerList, filterQuery]);
 
   const handleReloadList = () => {
     // clear query data and fetch random breweries again
@@ -108,21 +128,32 @@ const Home = () => {
                   Reload list
                 </Button>
               </div>
-              <ul className={styles.list}>
-                {filteredItems.map((beer, index) => (
-                  <li key={index.toString()}>
-                    <Checkbox
-                      checked={isFavorite(beer)}
-                      icon={<FavoriteBorder />}
-                      checkedIcon={<Favorite />}
-                      onChange={() => handleClickFavorite(beer)}
-                    />
-                    <Link component={RouterLink} to={`/beer/${beer.id}`}>
-                      {beer.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {filteredItems.length === 0 && !loading && (
+                <p className={styles.noItemsFound}>No items found</p>
+              )}
+              {loading && (
+                <CircularProgress
+                  className={styles.loadingIcon}
+                  disableShrink
+                />
+              )}
+              {filteredItems.length > 0 && (
+                <ul className={styles.list}>
+                  {filteredItems.map((beer, index) => (
+                    <li key={index.toString()}>
+                      <Checkbox
+                        checked={isFavorite(beer)}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                        onChange={() => handleClickFavorite(beer)}
+                      />
+                      <Link component={RouterLink} to={`/beer/${beer.id}`}>
+                        {beer.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </Paper>
 

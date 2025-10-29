@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   Avatar,
+  CircularProgress,
   List,
   ListItemAvatar,
   ListItemButton,
@@ -74,7 +75,7 @@ const BeerList = () => {
   };
 
   const loading = () => {
-    return <p>Loading...</p>;
+    return <CircularProgress className={styles.loadingIcon} disableShrink />;
   };
 
   return (
