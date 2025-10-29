@@ -40,7 +40,10 @@ const BeerList = () => {
   const totalPages = Math.round(parseInt(totalBrewers.total) / perPage);
 
   // Memoize callback functions to prevent unnecessary re-renders
-  const onBeerClick = useCallback((id: string) => navigate(`/beer/${id}`), [navigate]);
+  const onBeerClick = useCallback(
+    (id: string) => navigate(`/beer/${id}`),
+    [navigate]
+  );
 
   const handleChange = useCallback((value: number) => {
     setPage(value);

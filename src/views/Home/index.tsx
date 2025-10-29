@@ -68,30 +68,33 @@ const Home = () => {
     fetchData.bind(this, setBeerList)();
   }, []);
 
-  const handleClickFavorite = useCallback((beer: Beer): void => {
-    // check if clicked item is already in the fav list or not
-    if (savedList.includes(beer)) {
-      // save to the localStorage before updating the state
-      // that way we avoid missing items in the localStorage
-      setSavedList((prev) => {
-        const updatedList = prev.filter((obj) => obj.id !== beer.id);
-        window.localStorage.setItem(
-          "BEER_FAVORITES",
-          JSON.stringify(updatedList)
-        );
-        return updatedList;
-      });
-    } else {
-      setSavedList((prev) => {
-        const updatedList = [...prev, beer];
-        window.localStorage.setItem(
-          "BEER_FAVORITES",
-          JSON.stringify(updatedList)
-        );
-        return updatedList;
-      });
-    }
-  }, [savedList]);
+  const handleClickFavorite = useCallback(
+    (beer: Beer): void => {
+      // check if clicked item is already in the fav list or not
+      if (savedList.includes(beer)) {
+        // save to the localStorage before updating the state
+        // that way we avoid missing items in the localStorage
+        setSavedList((prev) => {
+          const updatedList = prev.filter((obj) => obj.id !== beer.id);
+          window.localStorage.setItem(
+            "BEER_FAVORITES",
+            JSON.stringify(updatedList)
+          );
+          return updatedList;
+        });
+      } else {
+        setSavedList((prev) => {
+          const updatedList = [...prev, beer];
+          window.localStorage.setItem(
+            "BEER_FAVORITES",
+            JSON.stringify(updatedList)
+          );
+          return updatedList;
+        });
+      }
+    },
+    [savedList]
+  );
 
   const handleClearFavorites = useCallback((): void => {
     setSavedList([]);
@@ -99,8 +102,10 @@ const Home = () => {
   }, []);
 
   // Memoize favorite check function to avoid recalculation
-  const isFavorite = useCallback((beer: Beer): boolean =>
-    savedList.some(saved => saved.id === beer.id), [savedList]);
+  const isFavorite = useCallback(
+    (beer: Beer): boolean => savedList.some((saved) => saved.id === beer.id),
+    [savedList]
+  );
 
   return (
     <article>

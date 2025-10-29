@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
-import { CircularProgress, Box } from '@mui/material';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { CircularProgress, Box } from "@mui/material";
 
-import Footer from '../components/Footer';
-import Menu from '../components/Menu';
-import Offline from '../views/Offline';
+import Footer from "../components/Footer";
+import Menu from "../components/Menu";
+import Offline from "../views/Offline";
 
 // Lazy load components for code splitting
-const Home = lazy(() => import('../views/Home'));
-const NotFound = lazy(() => import('../views/404'));
-const BeerList = lazy(() => import('../views/BeerList'));
-const Beer = lazy(() => import('../views/Beer'));
+const Home = lazy(() => import("../views/Home"));
+const NotFound = lazy(() => import("../views/404"));
+const BeerList = lazy(() => import("../views/BeerList"));
+const Beer = lazy(() => import("../views/Beer"));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -34,11 +34,11 @@ const Router = () => (
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route index element={<Home />} />
-          <Route path='beer'>
+          <Route path="beer">
             <Route index element={<BeerList />} />
-            <Route path=':id' element={<Beer />} />
+            <Route path=":id" element={<Beer />} />
           </Route>
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Footer />

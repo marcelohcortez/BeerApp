@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 import {
   Avatar,
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-} from '@mui/material';
-import SportsBar from '@mui/icons-material/SportsBar';
-import { Beer } from '../../types';
-import styles from '../BeerList/BeerList.module.css';
+} from "@mui/material";
+import SportsBar from "@mui/icons-material/SportsBar";
+import { Beer } from "../../types";
+import styles from "../BeerList/BeerList.module.css";
 
 interface BeerListItemProps {
   beer: Beer;
@@ -26,10 +26,7 @@ const BeerListItem: React.FC<BeerListItemProps> = memo(({ beer, onClick }) => {
       component="li"
     >
       <ListItemAvatar>
-        <Avatar
-          className={styles.beerListItemAvatar}
-          aria-hidden="true"
-        >
+        <Avatar className={styles.beerListItemAvatar} aria-hidden="true">
           <SportsBar />
         </Avatar>
       </ListItemAvatar>
@@ -44,6 +41,6 @@ const BeerListItem: React.FC<BeerListItemProps> = memo(({ beer, onClick }) => {
   );
 });
 
-BeerListItem.displayName = 'BeerListItem';
+BeerListItem.displayName = "BeerListItem";
 
 export default BeerListItem;
